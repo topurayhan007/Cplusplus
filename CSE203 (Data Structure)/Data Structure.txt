@@ -1,0 +1,143 @@
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <fstream>
+#include <cmath>
+
+using namespace std;
+struct ListNode {
+	int data = 0;
+	ListNode* next = nullptr;
+};
+void addValue(ListNode*& a, int value) {
+	if (a == nullptr) {
+		ListNode* x = new ListNode;
+		x->data = value;
+		x->next = a;//a is nullptr
+		a = x;
+	}
+	else {
+		ListNode* current = a;
+		while (current->next != nullptr) {
+			current = current->next;
+		}
+		ListNode* x = new ListNode;
+		x->data = value;
+
+		x->next = current->next;//current->next is nullptr
+		current->next = x;
+	}
+}
+void printData(ListNode* n) {
+	while (n != nullptr) {
+		cout << n->data << ", ";
+		n = n->next;
+	}
+	cout << endl;
+}
+void swap(int* a, int* b) {
+	int temp = *a;
+	*a = *b;
+	*b = temp;
+}
+void sort(ListNode* front) {
+	int temp = 0;
+	if (front == nullptr) {
+		return;
+	}
+	if (front->next == nullptr) {
+		return;
+	}
+	ListNode* current = front;
+	while (current->next != nullptr) {
+		//for (int i = 0; current->next != nullptr; ++i) {
+			if (current->data > current->next->data){
+				temp = current->data;
+				current->data = current->next->data;
+				current->next->data = temp;
+			}
+			current = current->next;
+			
+	}
+		//current = current->next;
+	//}
+}
+
+bool binarySearch(int key, int arr[], int low, int high) {
+	if (low > high) {
+		return false;
+	}
+	int mid = (low + high) / 2;
+	if (key == arr[mid]) {
+		return true;
+	}
+	if (key > arr[mid]) {
+		return binarySearch(key, arr, mid + 1, high);
+	}
+	else {
+		return binarySearch(key, arr, low, mid - 1);
+	}
+}
+
+void reverseLines(ifstream& input) {
+	string str = "";
+	if (getline(input, str)) {
+		reverseLines(input);
+		cout << str << endl;;
+	}
+}
+
+int main() {
+	ListNode* n = nullptr;
+
+	addValue(n, 1);
+	addValue(n, 2);
+	addValue(n, 5);
+	addValue(n, 23);
+	addValue(n, 16);
+	addValue(n, 7);
+	addValue(n, 20);
+	addValue(n, 17);
+	addValue(n, 9);
+	addValue(n, 15);
+	addValue(n, 41);
+	addValue (n, 40);
+	cout << "Original List: ";
+	printData(n);
+	sort(n);
+	cout << "After St List: ";
+	printData(n);
+
+
+
+
+
+
+
+
+	/*int arr[10] = { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
+	cout << binarySearch(10, arr, 0, 9) << endl;
+	
+	
+	
+	string str= "D:/text.txt";
+	ifstream input(str);
+	reverseLines(input);
+	
+	ifstream myFile;
+	myFile.open(input);
+	if (!myFile.is_open()) {
+		cout << "NOT Opening" << endl;
+		return -1;
+	}
+	else {
+		int num;
+
+		while (myFile >> num) {
+			cout << num << " ";
+		}
+	}
+	myFile.close();*/
+	return 0;
+}
+

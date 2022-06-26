@@ -1,0 +1,132 @@
+#include<bits/stdc++.h>
+using namespace std;
+struct ListNode{
+  int data;
+  ListNode* next;
+};
+void add(ListNode *& linklist,int value){
+  if(linklist==nullptr){
+    ListNode* n=new ListNode;
+    n->data=value;
+    n->next=linklist;
+    linklist=n;
+  }
+  else{
+    ListNode*current =linklist;
+    while(current->next!=nullptr){
+      current =current->next;
+    }
+    ListNode *a=new ListNode;
+    a->data=value;
+    a->next=current->next;
+    current->next=a;
+  }
+}
+void print(ListNode* a){
+  while(a!=nullptr){
+    cout<<a->data<<" ";
+    a=a->next;
+  }
+}
+void peek(ListNode*& a){
+  while(a->next->next!=nullptr){
+    if((a->next->data)>(a->data) && (a->next->data)>(a->next->next->data)){
+      cout<<a->next->data<<" ";
+    }
+    a=a->next;
+  }
+}
+int main(){
+  ListNode* a=nullptr;
+   for(int i=0;i<13;i++){
+    add(a,rand()%1000);
+  }  print(a);
+  cout<<endl;
+  peek(a);
+}
+
+
+
+
+
+
+
+#include<bits/stdc++.h>
+using namespace std;
+struct BinaryTreeNode {
+	int data;
+	BinaryTreeNode* left;
+	BinaryTreeNode* right;
+};
+void insert(BinaryTreeNode*& node, int value) {
+	if (node == nullptr) {
+		node = new BinaryTreeNode;
+		node->data = value;
+		node->right = nullptr;
+		node->left = nullptr;
+	}
+	else if (value > node->data) {
+		insert(node->right, value);
+	}
+	else if (value < node->data) {
+		insert(node->left, value);
+	}
+}
+void printbst(BinaryTreeNode* bst) {
+	if (bst == nullptr)
+		return;
+	printbst(bst->left);
+	cout << bst->data << " ";
+	printbst(bst->right);
+}
+int sumofnodeswithoutleaves(BinaryTreeNode *a)
+{
+	int rightsubtree, leftsubtree, sum = 0;
+	if(a != NULL)
+	{
+		if(a->left!=nullptr|| a->right!=nullptr){
+			leftsubtree = sumofnodeswithoutleaves(a->left);
+			rightsubtree = sumofnodeswithoutleaves(a->right);
+			sum = (a->data) + leftsubtree + rightsubtree;
+
+		}
+	}
+	return sum;
+}
+int sumofnodesAll(BinaryTreeNode *a)
+{
+	int rightsubtree, leftsubtree, sum = 0;
+	if(a != NULL)
+	{
+		leftsubtree = sumofnodesAll(a->left);
+		rightsubtree = sumofnodesAll(a->right);
+		sum = (a->data) + leftsubtree + rightsubtree;
+
+
+		
+
+		
+	}
+	return sum;
+}
+int sumLeaves(BinaryTreeNode*a){
+	return sumofnodesAll(a)-sumofnodeswithoutleaves(a);
+}
+int main() {
+	BinaryTreeNode* a = nullptr;
+	insert(a, 10);
+	insert(a, 7);
+	insert(a, 16);
+	insert(a, 3);
+	insert(a, 9);
+	insert(a, 24);
+	insert(a, 8);
+	insert(a, 25);
+	cout << "BST is: "; printbst(a); cout << endl;
+	cout<<sumofnodeswithoutleaves(a)<<endl;
+	cout<<sumofnodesAll(a)<<endl;
+	cout<<sumLeaves(a)<<endl;
+}
+
+
+

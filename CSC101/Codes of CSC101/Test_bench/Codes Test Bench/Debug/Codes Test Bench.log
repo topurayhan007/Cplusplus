@@ -1,0 +1,4 @@
+﻿  Source1.cpp
+Source.obj : error LNK2005: _main already defined in Codes Test Bench.obj
+Source1.obj : error LNK2005: _main already defined in Codes Test Bench.obj
+D:\Study\CSC101\Codes of CSC101\Test_bench\Debug\Codes Test Bench.exe : fatal error LNK1169: one or more multiply defined symbols found

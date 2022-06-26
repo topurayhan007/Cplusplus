@@ -1,0 +1,91 @@
+#include <iostream>
+using namespace std;
+struct Node {
+	int data = 0;
+	Node* next = nullptr;
+};
+void add(Node*& a, int b) {
+	if (a == nullptr) {
+		Node* K = new Node;
+		K->data = b;
+		K->next = nullptr;
+		a = K;
+	}
+	else {
+		Node* M = a;
+		while (M->next != nullptr) {
+			M = M->next;
+		}
+		Node* w = new Node;
+		w->data = b;
+		w->next = nullptr;
+		M->next = w;
+	}
+}
+void removeIndex(Node*& a, int index) {
+	if (index == 0) {
+		Node* j = a;
+		a = a->next;
+		delete j;
+	}
+	else {
+		Node* current = a;
+		for (int i = 0; i < index - 1; ++i) {
+			current = current->next;
+		}
+		Node* j = current->next;
+		current->next = current->next->next;
+		delete j;
+	}
+}
+void deleteAllDuplicates(Node*& a) {
+	int i = 0;
+
+	while (a != nullptr) {
+		Node* c = a;
+		Node* d = a;
+
+		if (c->data == c->next->data) {
+
+			removeIndex(c, i);
+			removeIndex(c, i + 1);
+			i=i+2;
+			a = a->next;
+		}
+		else {
+			a = a->next;
+i++ ;
+		}
+	}	
+}
+
+
+void print(Node*& a) {
+	while (a != nullptr) {
+		cout << a->data;
+		a = a->next;
+	}
+}
+
+
+
+int main() {
+	Node* j = nullptr;
+	add(j, 2);
+	add(j, 2);
+	add(j, 3);
+	add(j, 3);
+	add(j, 3);
+	add(j, 6);
+	print(j);
+	deleteAllDuplicates(j);
+	print(j);
+
+
+	cout << endl;
+
+
+
+
+
+}
